@@ -76,7 +76,7 @@ async function loadGallery() {
             behavior: 'smooth'
           });
         } else {
-        addMoreButton.style.display = 'none';  
+          addMoreButton.style.display = 'none';
         iziToast.error({
           message: 'Sorry, there are no images matching your search query. Please try again!',
           messageColor: '#FAFAFB',
