@@ -35,7 +35,6 @@ form.addEventListener('submit', async (event) => {
 async function loadMore() {
   page += 1;
   await loadGallery();
-  // }
 }
 
 function updateButtonVisibility() {
@@ -61,22 +60,23 @@ async function loadGallery() {
   load.style.display = 'block';
   try {
     await axios.get(`https://pixabay.com/api/?${searchParams}&per_page=${per_page}&page=${page}`)
-    .then((response) => {
-      load.style.display = 'none';
-      totalHits = response.data.totalHits;
-      if (totalHits > 0) {              
-        const imagesList = response.data.hits.reduce((html, image) => {
-          return html + imageCard(image);
-        }, '');        
-      gallery.innerHTML += imagesList;
-      modal.refresh();
-      const card = document.querySelector('.card');
-      const cardHeight = card.getBoundingClientRect().height;
-      window.scrollBy({
-        top: 2 * cardHeight,
-        behavior: 'smooth'
-      });
-      } else {
+      .then((response) => {
+        load.style.display = 'none';
+        totalHits = response.data.totalHits;
+        if (totalHits > 0) {              
+          const imagesList = response.data.hits.reduce((html, image) => {
+            return html + imageCard(image);
+          }, '');        
+          gallery.innerHTML += imagesList;
+          modal.refresh();
+          const card = document.querySelector('.card');
+          const cardHeight = card.getBoundingClientRect().height;
+          window.scrollBy({
+            top: 2 * cardHeight,
+            behavior: 'smooth'
+          });
+        } else {
+        addMoreButton.style.display = 'none';  
         iziToast.error({
           message: 'Sorry, there are no images matching your search query. Please try again!',
           messageColor: '#FAFAFB',
