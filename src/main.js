@@ -34,21 +34,20 @@ form.addEventListener('submit', async (event) => {
 
 async function loadMore() {
   page += 1;
-  const totalPages = Math.ceil(totalHits / per_page);
-  if (page > totalPages) {
-    updateButtonVisibility();
-  } else {
-    await loadGallery();
-  }
+  await loadGallery();
+  // }
 }
 
 function updateButtonVisibility() {
-  addMoreButton.style.display = 'none';
-  iziToast.show({
-    message: `We're sorry, but you've reached the end of search results.`,
-    position: 'topRight',
-  });
+  const totalPages = Math.ceil(totalHits / per_page);
+  if (page >= totalPages) {
+    addMoreButton.style.display = 'none';
+    iziToast.show({
+      message: `We're sorry, but you've reached the end of search results.`,
+      position: 'topRight',
+    })
   }
+}
 
 async function loadGallery() {
   const searchedWord = input.value;
@@ -86,6 +85,7 @@ async function loadGallery() {
       });
         return;
       }
+      updateButtonVisibility();
     })
     .catch ((error) => {
       console.log(error)

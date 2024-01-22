@@ -133,8 +133,10 @@
   line-height: 1.5;
   letter-spacing: 0.64px;
 
+  margin: 32px auto 0 auto;
+  /* margin-top: 0;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
 
   border-radius: 8px;
   background: #4e75ff;
